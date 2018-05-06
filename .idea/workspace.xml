@@ -2,16 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aa6f6ed8-939e-494a-ba1a-0822da7d1a5d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/CSVWriter.java" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/production/Daisyworld/DaisyWorld.class" afterPath="$PROJECT_DIR$/out/production/Daisyworld/DaisyWorld.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Daisyworld/Params.class" afterPath="$PROJECT_DIR$/out/production/Daisyworld/Params.class" />
       <change beforePath="$PROJECT_DIR$/out/production/Daisyworld/Simulation.class" afterPath="$PROJECT_DIR$/out/production/Daisyworld/Simulation.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/Daisyworld/Turtle/Turtle.class" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/DaisyWorld.java" afterPath="$PROJECT_DIR$/src/DaisyWorld.java" />
-      <change beforePath="$PROJECT_DIR$/src/Params.java" afterPath="$PROJECT_DIR$/src/Params.java" />
+      <change beforePath="$PROJECT_DIR$/out/production/Daisyworld/Turtle/BlackDaisy.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/out/production/Daisyworld/Turtle/Daisy.class" afterPath="$PROJECT_DIR$/out/production/Daisyworld/Turtle/Daisy.class" />
+      <change beforePath="$PROJECT_DIR$/out/production/Daisyworld/Turtle/WhiteDaisy.class" afterPath="" />
       <change beforePath="$PROJECT_DIR$/src/Simulation.java" afterPath="$PROJECT_DIR$/src/Simulation.java" />
-      <change beforePath="$PROJECT_DIR$/src/Turtle/Turtle.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Turtle/BlackDaisy.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Turtle/Daisy.java" afterPath="$PROJECT_DIR$/src/Daisy.java" />
+      <change beforePath="$PROJECT_DIR$/src/Turtle/WhiteDaisy.java" afterPath="" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,24 +26,113 @@
       <file leaf-file-name="Simulation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Simulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2760">
-              <caret line="127" column="49" lean-forward="false" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
+            <state relative-caret-position="229">
+              <caret line="220" column="20" lean-forward="false" selection-start-line="220" selection-start-column="20" selection-end-line="220" selection-end-column="20" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1078#1079#0" expanded="true" />
-                <element signature="e#1105#1106#0" expanded="true" />
-                <element signature="e#1146#1147#0" expanded="true" />
-                <element signature="e#1178#1179#0" expanded="true" />
+                <element signature="e#1026#1027#0" expanded="true" />
+                <element signature="e#1053#1054#0" expanded="true" />
+                <element signature="e#1094#1095#0" expanded="true" />
+                <element signature="e#1126#1127#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="System.java" pinned="false" current-in-tab="false">
-        <entry file="jar://D:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/System.java">
+      <file leaf-file-name="JAVA/" pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement />
+              <nodes>
+                <node x="0.0" y="0.0">Turtle.Daisy</node>
+                <node x="291.394675925926" y="27.5">Params</node>
+                <node x="378.1875" y="492.0">CSVWriter</node>
+                <node x="783.1875" y="411.0">Scenario</node>
+                <node x="251.74999999999997" y="1469.0">DaisyWorld</node>
+                <node x="144.99999999999994" y="815.0">Simulation</node>
+                <node x="68.0" y="451.5">Patch</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="Simulation" target="Params">
+                  <point x="31.22222222222223" y="-302.0" />
+                  <point x="316.7222222222222" y="765.0" />
+                  <point x="367.6875" y="765.0" />
+                  <point x="367.6875" y="386.0" />
+                  <point x="406.394675925926" y="386.0" />
+                  <point x="0.0" y="153.0" />
+                </edge>
+                <edge source="Simulation" target="Patch">
+                  <point x="-62.4444444444444" y="-302.0" />
+                  <point x="223.05555555555554" y="775.0" />
+                  <point x="111.5" y="775.0" />
+                  <point x="-87.0" y="126.5" />
+                </edge>
+                <edge source="DaisyWorld" target="Params">
+                  <point x="69.33333333333337" y="-31.5" />
+                  <point x="425.08333333333337" y="1444.0" />
+                  <point x="1018.6875" y="1444.0" />
+                  <point x="1018.6875" y="386.0" />
+                  <point x="483.0613425925927" y="386.0" />
+                  <point x="76.66666666666674" y="153.0" />
+                </edge>
+                <edge source="Simulation" target="Scenario">
+                  <point x="124.88888888888897" y="-302.0" />
+                  <point x="410.3888888888889" y="795.0" />
+                  <point x="951.9375" y="795.0" />
+                  <point x="56.25" y="167.0" />
+                </edge>
+                <edge source="Simulation" target="Turtle.Daisy">
+                  <point x="-124.88888888888886" y="-302.0" />
+                  <point x="160.6111111111111" y="795.0" />
+                  <point x="46.5" y="795.0" />
+                  <point x="46.5" y="386.0" />
+                  <point x="30.625" y="386.0" />
+                  <point x="-91.875" y="180.5" />
+                </edge>
+                <edge source="Patch" target="Turtle.Daisy">
+                  <point x="0.0" y="-126.5" />
+                  <point x="198.5" y="386.0" />
+                  <point x="214.375" y="386.0" />
+                  <point x="91.875" y="180.5" />
+                </edge>
+                <edge source="Patch" target="Params">
+                  <point x="87.0" y="-126.5" />
+                  <point x="285.5" y="386.0" />
+                  <point x="329.72800925925935" y="386.0" />
+                  <point x="-76.66666666666663" y="153.0" />
+                </edge>
+                <edge source="Simulation" target="CSVWriter">
+                  <point x="62.444444444444514" y="-302.0" />
+                  <point x="347.94444444444446" y="775.0" />
+                  <point x="570.6875" y="775.0" />
+                  <point x="0.0" y="86.0" />
+                </edge>
+                <edge source="DaisyWorld" target="Simulation">
+                  <point x="-69.33333333333331" y="-31.5" />
+                  <point x="286.41666666666663" y="1444.0" />
+                  <point x="215.24999999999994" y="1444.0" />
+                  <point x="-70.25" y="302.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="0.5554808338937458" x="-511.5308716707022" y="412.05811138014525" />
+              <SelectedNodes />
+              <Categories>
+                <Category>Fields</Category>
+                <Category>Methods</Category>
+              </Categories>
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7512">
-              <caret line="385" column="30" lean-forward="false" selection-start-line="385" selection-start-column="30" selection-end-line="385" selection-end-column="30" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -78,48 +167,38 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Patch.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Patch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="26" column="16" lean-forward="false" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Daisy.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Turtle/Daisy.java">
+        <entry file="file://$PROJECT_DIR$/src/Daisy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
+            <state relative-caret-position="168">
+              <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
               <folding>
-                <element signature="e#200#201#0" expanded="true" />
-                <element signature="e#227#228#0" expanded="true" />
-                <element signature="e#267#268#0" expanded="true" />
-                <element signature="e#299#300#0" expanded="true" />
-                <element signature="e#367#368#0" expanded="true" />
-                <element signature="e#396#397#0" expanded="true" />
-                <element signature="e#439#440#0" expanded="true" />
-                <element signature="e#475#476#0" expanded="true" />
+                <element signature="e#247#248#0" expanded="true" />
+                <element signature="e#277#278#0" expanded="true" />
+                <element signature="e#324#325#0" expanded="true" />
+                <element signature="e#362#363#0" expanded="true" />
+                <element signature="e#394#395#0" expanded="true" />
+                <element signature="e#423#424#0" expanded="true" />
+                <element signature="e#466#467#0" expanded="true" />
                 <element signature="e#502#503#0" expanded="true" />
-                <element signature="e#528#529#0" expanded="true" />
-                <element signature="e#563#564#0" expanded="true" />
-                <element signature="e#593#594#0" expanded="true" />
-                <element signature="e#623#624#0" expanded="true" />
-                <element signature="e#652#653#0" expanded="true" />
-                <element signature="e#693#694#0" expanded="true" />
-                <element signature="e#729#730#0" expanded="true" />
+                <element signature="e#529#530#0" expanded="true" />
+                <element signature="e#555#556#0" expanded="true" />
+                <element signature="e#590#591#0" expanded="true" />
+                <element signature="e#620#621#0" expanded="true" />
+                <element signature="e#650#651#0" expanded="true" />
+                <element signature="e#679#680#0" expanded="true" />
+                <element signature="e#720#721#0" expanded="true" />
+                <element signature="e#756#757#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CSVWriter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CSVWriter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CSVWriter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
-              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+              <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,16 +221,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BlackDaisy.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Turtle/BlackDaisy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -197,21 +266,22 @@
         <option value="$PROJECT_DIR$/src/WhiteDaisy.java" />
         <option value="$PROJECT_DIR$/src/BlackDaisy.java" />
         <option value="$PROJECT_DIR$/src/Turtles.java" />
-        <option value="$PROJECT_DIR$/src/Daisy.java" />
         <option value="$PROJECT_DIR$/src/Turtle/Turtles.java" />
         <option value="$PROJECT_DIR$/src/parameters.java" />
         <option value="$PROJECT_DIR$/src/Parameters.java" />
         <option value="$PROJECT_DIR$/src/Turtle/Turtle.java" />
         <option value="$PROJECT_DIR$/src/Patch.java" />
         <option value="$PROJECT_DIR$/src/Util.java" />
-        <option value="$PROJECT_DIR$/src/Turtle/Daisy.java" />
         <option value="$PROJECT_DIR$/src/Turtle/WhiteDaisy.java" />
         <option value="$PROJECT_DIR$/src/Turtle/BlackDaisy.java" />
         <option value="$PROJECT_DIR$/src/Scenario.java" />
         <option value="$PROJECT_DIR$/src/CSVWriter.java" />
         <option value="$PROJECT_DIR$/src/DaisyWorld.java" />
-        <option value="$PROJECT_DIR$/src/Simulation.java" />
         <option value="$PROJECT_DIR$/src/Params.java" />
+        <option value="$PROJECT_DIR$/src/Turtle/Daisy.java" />
+        <option value="$PROJECT_DIR$/src/Daisy.java" />
+        <option value="$PROJECT_DIR$/src/Simulation.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -221,7 +291,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="489" />
     <option name="y" value="16" />
     <option name="width" value="1400" />
@@ -254,12 +324,6 @@
               <item name="Daisyworld" type="b2602c69:ProjectViewProjectNode" />
               <item name="Daisyworld" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Daisyworld" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Daisyworld" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Turtle" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -411,19 +475,20 @@
       <workItem from="1525503512243" duration="20075000" />
       <workItem from="1525613739311" duration="2650000" />
       <workItem from="1525617069136" duration="1566000" />
-      <workItem from="1525648484180" duration="80000" />
+      <workItem from="1525648484180" duration="1800000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24371000" />
+    <option name="totallyTimeSpent" value="26091000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1060" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -446,7 +511,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921347" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -462,65 +526,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="22" lean-forward="false" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Patch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="26" column="16" lean-forward="false" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Turtle/Daisy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
-          <folding>
-            <element signature="e#200#201#0" expanded="true" />
-            <element signature="e#227#228#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-            <element signature="e#299#300#0" expanded="true" />
-            <element signature="e#367#368#0" expanded="true" />
-            <element signature="e#396#397#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#475#476#0" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#528#529#0" expanded="true" />
-            <element signature="e#563#564#0" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#623#624#0" expanded="true" />
-            <element signature="e#652#653#0" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-            <element signature="e#729#730#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CSVWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Params.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="45" lean-forward="false" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DaisyWorld.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -534,11 +539,10 @@
         <state relative-caret-position="1872">
           <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1078#1079#0" expanded="true" />
-            <element signature="e#1105#1106#0" expanded="true" />
-            <element signature="e#1146#1147#0" expanded="true" />
-            <element signature="e#1178#1179#0" expanded="true" />
+            <element signature="e#1026#1027#0" expanded="true" />
+            <element signature="e#1053#1054#0" expanded="true" />
+            <element signature="e#1094#1095#0" expanded="true" />
+            <element signature="e#1126#1127#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -584,27 +588,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Turtle/Daisy.java">
+    <entry file="file://$PROJECT_DIR$/src/Daisy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
           <folding>
-            <element signature="e#200#201#0" expanded="true" />
-            <element signature="e#227#228#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-            <element signature="e#299#300#0" expanded="true" />
-            <element signature="e#367#368#0" expanded="true" />
-            <element signature="e#396#397#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#475#476#0" expanded="true" />
+            <element signature="e#247#248#0" expanded="true" />
+            <element signature="e#277#278#0" expanded="true" />
+            <element signature="e#324#325#0" expanded="true" />
+            <element signature="e#362#363#0" expanded="true" />
+            <element signature="e#394#395#0" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#466#467#0" expanded="true" />
             <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#528#529#0" expanded="true" />
-            <element signature="e#563#564#0" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#623#624#0" expanded="true" />
-            <element signature="e#652#653#0" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-            <element signature="e#729#730#0" expanded="true" />
+            <element signature="e#529#530#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#679#680#0" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#756#757#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -646,11 +650,10 @@
         <state relative-caret-position="1872">
           <caret line="87" column="40" lean-forward="false" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1078#1079#0" expanded="true" />
-            <element signature="e#1105#1106#0" expanded="true" />
-            <element signature="e#1146#1147#0" expanded="true" />
-            <element signature="e#1178#1179#0" expanded="true" />
+            <element signature="e#1026#1027#0" expanded="true" />
+            <element signature="e#1053#1054#0" expanded="true" />
+            <element signature="e#1094#1095#0" expanded="true" />
+            <element signature="e#1126#1127#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -726,27 +729,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Turtle/Daisy.java">
+    <entry file="file://$PROJECT_DIR$/src/Daisy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
           <folding>
-            <element signature="e#200#201#0" expanded="true" />
-            <element signature="e#227#228#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-            <element signature="e#299#300#0" expanded="true" />
-            <element signature="e#367#368#0" expanded="true" />
-            <element signature="e#396#397#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#475#476#0" expanded="true" />
+            <element signature="e#247#248#0" expanded="true" />
+            <element signature="e#277#278#0" expanded="true" />
+            <element signature="e#324#325#0" expanded="true" />
+            <element signature="e#362#363#0" expanded="true" />
+            <element signature="e#394#395#0" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#466#467#0" expanded="true" />
             <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#528#529#0" expanded="true" />
-            <element signature="e#563#564#0" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#623#624#0" expanded="true" />
-            <element signature="e#652#653#0" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-            <element signature="e#729#730#0" expanded="true" />
+            <element signature="e#529#530#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#679#680#0" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#756#757#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -828,54 +831,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Turtle/Daisy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="30" column="16" lean-forward="false" selection-start-line="30" selection-start-column="16" selection-end-line="30" selection-end-column="16" />
-          <folding>
-            <element signature="e#200#201#0" expanded="true" />
-            <element signature="e#227#228#0" expanded="true" />
-            <element signature="e#267#268#0" expanded="true" />
-            <element signature="e#299#300#0" expanded="true" />
-            <element signature="e#367#368#0" expanded="true" />
-            <element signature="e#396#397#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#475#476#0" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-            <element signature="e#528#529#0" expanded="true" />
-            <element signature="e#563#564#0" expanded="true" />
-            <element signature="e#593#594#0" expanded="true" />
-            <element signature="e#623#624#0" expanded="true" />
-            <element signature="e#652#653#0" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-            <element signature="e#729#730#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Turtle/Turtle.java" />
     <entry file="file://$PROJECT_DIR$/src/Patch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="26" column="16" lean-forward="false" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Scenario.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="2" column="84" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="84" />
-          <folding>
-            <element signature="e#391#392#0" expanded="true" />
-            <element signature="e#418#419#0" expanded="true" />
-            <element signature="e#458#459#0" expanded="true" />
-            <element signature="e#490#491#0" expanded="true" />
-            <element signature="e#522#523#0" expanded="true" />
-            <element signature="e#551#552#0" expanded="true" />
-            <element signature="e#594#595#0" expanded="true" />
-            <element signature="e#630#631#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -905,20 +866,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Simulation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2760">
-          <caret line="127" column="49" lean-forward="false" selection-start-line="127" selection-start-column="49" selection-end-line="127" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1078#1079#0" expanded="true" />
-            <element signature="e#1105#1106#0" expanded="true" />
-            <element signature="e#1146#1147#0" expanded="true" />
-            <element signature="e#1178#1179#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Params.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -935,6 +882,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/CSVWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="18" column="19" lean-forward="false" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Scenario.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="84" lean-forward="false" selection-start-line="2" selection-start-column="76" selection-end-line="2" selection-end-column="84" />
+          <folding>
+            <element signature="e#391#392#0" expanded="true" />
+            <element signature="e#418#419#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
+            <element signature="e#490#491#0" expanded="true" />
+            <element signature="e#522#523#0" expanded="true" />
+            <element signature="e#551#552#0" expanded="true" />
+            <element signature="e#594#595#0" expanded="true" />
+            <element signature="e#630#631#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Turtle/BlackDaisy.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -943,13 +917,186 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CSVWriter.java">
+    <entry file="file://$PROJECT_DIR$/src/Daisy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+        <state relative-caret-position="168">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#247#248#0" expanded="true" />
+            <element signature="e#277#278#0" expanded="true" />
+            <element signature="e#324#325#0" expanded="true" />
+            <element signature="e#362#363#0" expanded="true" />
+            <element signature="e#394#395#0" expanded="true" />
+            <element signature="e#423#424#0" expanded="true" />
+            <element signature="e#466#467#0" expanded="true" />
+            <element signature="e#502#503#0" expanded="true" />
+            <element signature="e#529#530#0" expanded="true" />
+            <element signature="e#555#556#0" expanded="true" />
+            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#620#621#0" expanded="true" />
+            <element signature="e#650#651#0" expanded="true" />
+            <element signature="e#679#680#0" expanded="true" />
+            <element signature="e#720#721#0" expanded="true" />
+            <element signature="e#756#757#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/CSVWriter">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>CSVWriter</OriginalElement>
+          <nodes>
+            <node x="" y="">DaisyWorld</node>
+            <node x="" y="">java.lang.Enum</node>
+            <node x="" y="">Simulation</node>
+            <node x="" y="">Turtle.Daisy</node>
+            <node x="" y="">Params</node>
+            <node x="" y="">CSVWriter</node>
+            <node x="" y="">Util</node>
+            <node x="" y="">java.lang.Comparable</node>
+            <node x="" y="">Patch</node>
+            <node x="" y="">java.io.Serializable</node>
+            <node x="" y="">Scenario</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="212.0" y="356.0" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/Simulation">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>Simulation</OriginalElement>
+          <nodes />
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="66.0" y="148.5" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Simulation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="220" column="20" lean-forward="false" selection-start-line="220" selection-start-column="20" selection-end-line="220" selection-end-column="20" />
+          <folding>
+            <element signature="e#1026#1027#0" expanded="true" />
+            <element signature="e#1053#1054#0" expanded="true" />
+            <element signature="e#1094#1095#0" expanded="true" />
+            <element signature="e#1126#1127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Top-Level Package.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="0.0" y="0.0">Turtle.Daisy</node>
+            <node x="291.394675925926" y="27.5">Params</node>
+            <node x="378.1875" y="492.0">CSVWriter</node>
+            <node x="783.1875" y="411.0">Scenario</node>
+            <node x="251.74999999999997" y="1469.0">DaisyWorld</node>
+            <node x="144.99999999999994" y="815.0">Simulation</node>
+            <node x="68.0" y="451.5">Patch</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="Simulation" target="Params">
+              <point x="31.22222222222223" y="-302.0" />
+              <point x="316.7222222222222" y="765.0" />
+              <point x="367.6875" y="765.0" />
+              <point x="367.6875" y="386.0" />
+              <point x="406.394675925926" y="386.0" />
+              <point x="0.0" y="153.0" />
+            </edge>
+            <edge source="Simulation" target="Patch">
+              <point x="-62.4444444444444" y="-302.0" />
+              <point x="223.05555555555554" y="775.0" />
+              <point x="111.5" y="775.0" />
+              <point x="-87.0" y="126.5" />
+            </edge>
+            <edge source="DaisyWorld" target="Params">
+              <point x="69.33333333333337" y="-31.5" />
+              <point x="425.08333333333337" y="1444.0" />
+              <point x="1018.6875" y="1444.0" />
+              <point x="1018.6875" y="386.0" />
+              <point x="483.0613425925927" y="386.0" />
+              <point x="76.66666666666674" y="153.0" />
+            </edge>
+            <edge source="Simulation" target="Scenario">
+              <point x="124.88888888888897" y="-302.0" />
+              <point x="410.3888888888889" y="795.0" />
+              <point x="951.9375" y="795.0" />
+              <point x="56.25" y="167.0" />
+            </edge>
+            <edge source="Simulation" target="Turtle.Daisy">
+              <point x="-124.88888888888886" y="-302.0" />
+              <point x="160.6111111111111" y="795.0" />
+              <point x="46.5" y="795.0" />
+              <point x="46.5" y="386.0" />
+              <point x="30.625" y="386.0" />
+              <point x="-91.875" y="180.5" />
+            </edge>
+            <edge source="Patch" target="Turtle.Daisy">
+              <point x="0.0" y="-126.5" />
+              <point x="198.5" y="386.0" />
+              <point x="214.375" y="386.0" />
+              <point x="91.875" y="180.5" />
+            </edge>
+            <edge source="Patch" target="Params">
+              <point x="87.0" y="-126.5" />
+              <point x="285.5" y="386.0" />
+              <point x="329.72800925925935" y="386.0" />
+              <point x="-76.66666666666663" y="153.0" />
+            </edge>
+            <edge source="Simulation" target="CSVWriter">
+              <point x="62.444444444444514" y="-302.0" />
+              <point x="347.94444444444446" y="775.0" />
+              <point x="570.6875" y="775.0" />
+              <point x="0.0" y="86.0" />
+            </edge>
+            <edge source="DaisyWorld" target="Simulation">
+              <point x="-69.33333333333331" y="-31.5" />
+              <point x="286.41666666666663" y="1444.0" />
+              <point x="215.24999999999994" y="1444.0" />
+              <point x="-70.25" y="302.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.5554808338937458" x="-511.5308716707022" y="412.05811138014525" />
+          <SelectedNodes />
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

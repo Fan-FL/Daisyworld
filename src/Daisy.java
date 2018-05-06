@@ -1,20 +1,21 @@
 package Turtle;
 
-public abstract class Daisy{
+public class Daisy{
     protected float albedo = 0.5f;
     protected int age = 0;
     protected int maxAge = 25;
-    protected String name = "";
+    public enum Species {
+        BLACK, WHITE
+    }
+    protected Species species;
 
-    public String getName() {
-        return name;
+    public Species getSpecies() {
+        return species;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSpecies(Species species) {
+        this.species = species;
     }
-
-    public abstract void update();
 
     public float getAlbedo() {
         return albedo;

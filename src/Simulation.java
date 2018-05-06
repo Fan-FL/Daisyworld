@@ -1,6 +1,4 @@
-import Turtle.BlackDaisy;
 import Turtle.Daisy;
-import Turtle.WhiteDaisy;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -57,7 +55,8 @@ public class Simulation {
         //randomly generate black daisies
         for (int i=0; i<this.numBlacks; i++){
             int index = Util.getRandom(0, this.height*this.width, set);
-            Daisy daisy = new BlackDaisy();
+            Daisy daisy = new Daisy();
+            daisy.setSpecies(Daisy.Species.BLACK);
             daisy.setAlbedo(Params.albedoOfBlacks);
             daisy.setAge(random.nextInt(Params.maxAge));
             patches[index/this.width][index%this.width].setDaisy(daisy);
@@ -66,7 +65,8 @@ public class Simulation {
         //randomly generate white daisies
         for (int i=0; i<this.numWhites; i++){
             int index = Util.getRandom(0, this.height*this.width, set);
-            Daisy daisy = new WhiteDaisy();
+            Daisy daisy = new Daisy();
+            daisy.setSpecies(Daisy.Species.WHITE);
             daisy.setAlbedo(Params.albedoOfWhites);
             daisy.setAge(random.nextInt(Params.maxAge));
             patches[index/this.width][index%this.width].setDaisy(daisy);
@@ -195,7 +195,7 @@ public class Simulation {
                     daisy.setAge(daisy.getAge() + 1);
 
                     if (daisy.getAge() < Params.maxAge - daisy.getAge()){
-                        if (daisy.getName().equals("Black")){
+                        if (daisy.getSpecies() == Daisy.Species.BLACK){
                             this.numBlacks--;
                         }else{
                             this.numWhites--;
@@ -219,13 +219,15 @@ public class Simulation {
                             int c = j + dc;
                             if ((r >= 0) && (r < this.height) && (c >= 0) && (c < this.width)
                                     && patches[r][c].getDaisy() == null) {
-                                if (daisy.getName().equals("Black")){
-                                    Daisy newDaisy = new BlackDaisy();
+                                if (daisy.getSpecies() == Daisy.Species.BLACK){
+                                    Daisy newDaisy = new Daisy();
+                                    daisy.setSpecies(Daisy.Species.BLACK);
                                     newDaisy.setAlbedo(Params.albedoOfBlacks);
                                     patches[r][c].setDaisy(newDaisy);
                                     this.numBlacks++;
                                 }else {
-                                    Daisy newDaisy = new WhiteDaisy();
+                                    Daisy newDaisy = new Daisy();
+                                    daisy.setSpecies(Daisy.Species.WHITE);
                                     newDaisy.setAlbedo(Params.albedoOfWhites);
                                     patches[r][c].setDaisy(newDaisy);
                                     this.numWhites++;
