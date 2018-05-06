@@ -2,6 +2,9 @@ import Turtle.BlackDaisy;
 import Turtle.Daisy;
 import Turtle.WhiteDaisy;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -15,8 +18,15 @@ public class Simulation {
     private int numWhites = 0;
     Scenario scenario = Scenario.HIGH;
     private float globalTemperature = 0.0f;
+    private String csvFile = "Daisyworld-" + String.valueOf(System.currentTimeMillis()) + ".csv";
+    FileWriter writer = null;
 
     public Simulation() {
+        try {
+            this.writer = new FileWriter(csvFile);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
         this.patches = new Patch[this.height][this.width];
         for(int i=0; i<this.height; i++){
             for(int j=0; j<this.width; j++){
@@ -64,6 +74,28 @@ public class Simulation {
 
         this.calcTemperature();
         this.calcGlobalTemperature();
+
+        this.outputSetup();
+    }
+
+    private void outputSetup() {
+        try {
+            CSVWriter.writeLine(writer, Arrays.asList("startPctWhites", String.valueOf(Params.startPctWhites)));
+            CSVWriter.writeLine(writer, Arrays.asList("albedoOfWhites", String.valueOf(Params.albedoOfWhites)));
+            CSVWriter.writeLine(writer, Arrays.asList("startPctBlacks", String.valueOf(Params.startPctBlacks)));
+            CSVWriter.writeLine(writer, Arrays.asList("albedoOfBlacks", String.valueOf(Params.albedoOfBlacks)));
+            CSVWriter.writeLine(writer, Arrays.asList("solarLuminosity", String.valueOf(Params.solarLuminosity)));
+            CSVWriter.writeLine(writer, Arrays.asList("albedoOfSurface", String.valueOf(Params.albedoOfSurface)));
+            CSVWriter.writeLine(writer, Arrays.asList("diffusePct", String.valueOf(Params.diffusePct)));
+            CSVWriter.writeLine(writer, Arrays.asList("maxAge", String.valueOf(Params.maxAge)));
+            CSVWriter.writeLine(writer, Arrays.asList("numBlacks", String.valueOf(this.numBlacks)));
+            CSVWriter.writeLine(writer, Arrays.asList("numWhites", String.valueOf(this.numWhites)));
+            CSVWriter.writeLine(writer, Arrays.asList("globalTemperature", String.valueOf(this.globalTemperature)));
+            CSVWriter.writeLine(writer, Arrays.asList("tick", "numWhites", "numBlacks", "globalTemperature"));
+            writer.flush();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void go(){
@@ -76,6 +108,11 @@ public class Simulation {
                 tick();
             }
         }
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void tick() {
@@ -85,6 +122,16 @@ public class Simulation {
         this.calcGlobalTemperature();
 
         this.currentTick++;
+
+        try {
+            CSVWriter.writeLine(writer, Arrays.asList(String.valueOf(this.currentTick), String.valueOf(this.numWhites),
+                    String.valueOf(this.numBlacks), String.valueOf(this.globalTemperature)));
+            writer.flush();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.println(currentTick);
 
         if (scenario == Scenario.RAMP){
@@ -148,6 +195,11 @@ public class Simulation {
                     daisy.setAge(daisy.getAge() + 1);
 
                     if (daisy.getAge() < Params.maxAge - daisy.getAge()){
+                        if (daisy.getName().equals("Black")){
+                            this.numBlacks--;
+                        }else{
+                            this.numWhites--;
+                        }
                         patch.setDaisy(null);
                         return;
                     }
@@ -171,10 +223,12 @@ public class Simulation {
                                     Daisy newDaisy = new BlackDaisy();
                                     newDaisy.setAlbedo(Params.albedoOfBlacks);
                                     patches[r][c].setDaisy(newDaisy);
+                                    this.numBlacks++;
                                 }else {
                                     Daisy newDaisy = new WhiteDaisy();
                                     newDaisy.setAlbedo(Params.albedoOfWhites);
                                     patches[r][c].setDaisy(newDaisy);
+                                    this.numWhites++;
                                 }
                                 seed = true;
                             }

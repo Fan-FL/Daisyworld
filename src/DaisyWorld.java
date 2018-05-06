@@ -1,5 +1,3 @@
-import java.util.HashSet;
-
 public class DaisyWorld {
     public static void main(String[] args) {
         Simulation simulation = new Simulation();
