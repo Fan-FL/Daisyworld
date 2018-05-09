@@ -2,10 +2,10 @@ public enum Scenario {
     RAMP("ramp-up-ramp-down", 0.8f), LOW("low solar luminosity", 0.6f),
     OUR("our solar luminosity", 1.0f), HIGH("high solar luminosity", 1.4f), MAINTAIN("maintain", 0.0f);
     private String name;
-    private float albedo;
+    private float solarLuminosity;
     private Scenario(String name, float albedo) {
         this.name = name;
-        this.albedo = albedo;
+        this.solarLuminosity = albedo;
     }
 
     public String getName() {
@@ -16,11 +16,11 @@ public enum Scenario {
         this.name = name;
     }
 
-    public float getAlbedo() {
-        return albedo;
+    public float getSolarLuminosity() {
+        return solarLuminosity;
     }
 
-    public void setAlbedo(float albedo) {
-        this.albedo = albedo;
+    public void setSolarLuminosity(float albedo) {
+        this.solarLuminosity = albedo;
     }
 }

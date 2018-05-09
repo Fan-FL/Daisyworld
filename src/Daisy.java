@@ -1,13 +1,20 @@
-package Turtle;
-
 public class Daisy{
     protected float albedo = 0.5f;
     protected int age = 0;
-    protected int maxAge = 25;
+    boolean sprout = true;
+    protected Species species = Species.BLACK;
+
+    public boolean isSprout() {
+        return sprout;
+    }
+
+    public void setSprout(boolean sprout) {
+        this.sprout = sprout;
+    }
+
     public enum Species {
         BLACK, WHITE
     }
-    protected Species species;
 
     public Species getSpecies() {
         return species;
@@ -31,13 +38,5 @@ public class Daisy{
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public int getMaxAge() {
-        return maxAge;
-    }
-
-    public void setMaxAge(int maxAge) {
-        this.maxAge = maxAge;
     }
 }

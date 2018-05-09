@@ -1,8 +1,6 @@
-import Turtle.Daisy;
-
 public class Patch {
     private Daisy daisy = null;
-    private float temperature;
+    private float temperature = 0.0f;
 
     public Daisy getDaisy() {
         return daisy;

@@ -1,5 +1,3 @@
-import Turtle.Daisy;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
@@ -14,9 +12,10 @@ public class Simulation {
     private Patch[][] patches;
     private int numBlacks = 0;
     private int numWhites = 0;
-    Scenario scenario = Scenario.HIGH;
+    Scenario scenario = Scenario.OUR;
     private float globalTemperature = 0.0f;
-    private String csvFile = "Daisyworld-" + String.valueOf(System.currentTimeMillis()) + ".csv";
+//    private String csvFile = "Daisyworld-" + String.valueOf(System.currentTimeMillis()) + ".csv";
+    private String csvFile = "Daisyworld.csv";
     FileWriter writer = null;
 
     public Simulation() {
@@ -43,12 +42,15 @@ public class Simulation {
 
     public void setup(){
         if (scenario != Scenario.MAINTAIN){
-            Params.albedoOfSurface = scenario.getAlbedo();
+            Params.solarLuminosity = scenario.getSolarLuminosity();
         }
 
         Random random = new Random();
         numBlacks = Math.round(this.height*this.width*Params.startPctBlacks);
         numWhites = Math.round(this.height*this.width*Params.startPctWhites);
+
+//        System.out.println(numBlacks);
+//        System.out.println(numWhites);
 
         //index of occupied patches
         HashSet<Integer> set = new HashSet<>();
@@ -59,6 +61,7 @@ public class Simulation {
             daisy.setSpecies(Daisy.Species.BLACK);
             daisy.setAlbedo(Params.albedoOfBlacks);
             daisy.setAge(random.nextInt(Params.maxAge));
+            daisy.setSprout(false);
             patches[index/this.width][index%this.width].setDaisy(daisy);
         }
 
@@ -69,8 +72,11 @@ public class Simulation {
             daisy.setSpecies(Daisy.Species.WHITE);
             daisy.setAlbedo(Params.albedoOfWhites);
             daisy.setAge(random.nextInt(Params.maxAge));
+            daisy.setSprout(false);
             patches[index/this.width][index%this.width].setDaisy(daisy);
         }
+
+        this.printWorldMap();
 
         this.calcTemperature();
         this.calcGlobalTemperature();
@@ -108,6 +114,10 @@ public class Simulation {
                 tick();
             }
         }
+
+        this.printWorldMap();
+        System.out.println("globalTemperature = "+ String.valueOf(this.globalTemperature));
+
         try {
             writer.close();
         } catch (IOException e) {
@@ -132,8 +142,6 @@ public class Simulation {
             e.printStackTrace();
         }
 
-        System.out.println(currentTick);
-
         if (scenario == Scenario.RAMP){
             if (this.currentTick > 200 && this.currentTick <= 400){
                 Params.solarLuminosity = Params.solarLuminosity + 0.005f;
@@ -153,7 +161,7 @@ public class Simulation {
     }
 
     private void calcGlobalTemperature(){
-        float sum = 0;
+        float sum = 0.0f;
         for(int i=0; i<this.height; i++){
             for(int j=0; j<this.width; j++){
                 Patch patch = patches[i][j];
@@ -167,17 +175,17 @@ public class Simulation {
         for(int i=0; i<this.height; i++){
             for(int j=0; j<this.width; j++){
                 Patch patch = patches[i][j];
-                float diffusionTemp = patch.getTemperature() * Params.diffusePct;
+                float diffuseTemp = patch.getTemperature() * Params.diffusePct;
                 patch.setTemperature(patch.getTemperature() * (1-Params.diffusePct));
-                for (int dr = -1; dr <= +1; dr++) {
-                    for (int dc = -1; dc <= +1; dc++) {
+                for (int dr = -1; dr <= 1; dr++) {
+                    for (int dc = -1; dc <= 1; dc++) {
                         if (dr == 0 && dc == 0) continue;
                         int r = i + dr;
                         int c = j + dc;
                         if ((r >= 0) && (r < this.height) && (c >= 0) && (c < this.width)) {
-                            patches[r][c].setTemperature(patches[r][c].getTemperature() + diffusionTemp/8.0f);
+                            patches[r][c].setTemperature(patches[r][c].getTemperature() + diffuseTemp/8.0f);
                         }else {
-                            patch.setTemperature(patch.getTemperature() + diffusionTemp/8.0f);
+                            patch.setTemperature(patch.getTemperature() + diffuseTemp/8.0f);
                         }
                     }
                 }
@@ -192,16 +200,20 @@ public class Simulation {
                 Patch patch = patches[i][j];
                 if (patch.getDaisy() != null){
                     Daisy daisy = patch.getDaisy();
+
+                    if (daisy.isSprout()){
+                        continue;
+                    }
                     daisy.setAge(daisy.getAge() + 1);
 
-                    if (daisy.getAge() < Params.maxAge - daisy.getAge()){
+                    if (daisy.getAge() >= Params.maxAge){
                         if (daisy.getSpecies() == Daisy.Species.BLACK){
                             this.numBlacks--;
                         }else{
                             this.numWhites--;
                         }
                         patch.setDaisy(null);
-                        return;
+                        continue;
                     }
 
                     seedThreshold = 0.1457f * patch.getTemperature()
@@ -221,13 +233,13 @@ public class Simulation {
                                     && patches[r][c].getDaisy() == null) {
                                 if (daisy.getSpecies() == Daisy.Species.BLACK){
                                     Daisy newDaisy = new Daisy();
-                                    daisy.setSpecies(Daisy.Species.BLACK);
+                                    newDaisy.setSpecies(Daisy.Species.BLACK);
                                     newDaisy.setAlbedo(Params.albedoOfBlacks);
                                     patches[r][c].setDaisy(newDaisy);
                                     this.numBlacks++;
                                 }else {
                                     Daisy newDaisy = new Daisy();
-                                    daisy.setSpecies(Daisy.Species.WHITE);
+                                    newDaisy.setSpecies(Daisy.Species.WHITE);
                                     newDaisy.setAlbedo(Params.albedoOfWhites);
                                     patches[r][c].setDaisy(newDaisy);
                                     this.numWhites++;
@@ -239,5 +251,40 @@ public class Simulation {
                 }
             }
         }
+
+        for(int i=0; i<this.height; i++) {
+            for (int j = 0; j < this.width; j++) {
+                Patch patch = patches[i][j];
+                if (patch.getDaisy() != null) {
+                    patch.getDaisy().setSprout(false);
+                }
+            }
+        }
+    }
+
+    private void printWorldMap(){
+        System.out.print(String.format("%1$3s", "idx"));
+        for(int j=0; j<this.width; j++){
+            System.out.print(String.format("%1$3d", j));
+        }
+        System.out.println("");
+        for(int i=0; i<this.height; i++){
+            System.out.print(String.format("%1$3d", i));
+            for(int j=0; j<this.width; j++){
+                Patch patch = patches[i][j];
+                if (patch.getDaisy() != null){
+                    if(patch.getDaisy().getSpecies() == Daisy.Species.BLACK){
+                        System.out.print(String.format("%1$3d", 2));
+                    }else {
+                        System.out.print(String.format("%1$3d", 1));
+                    }
+
+                }else {
+                    System.out.print(String.format("%1$3d", 0));
+                }
+            }
+            System.out.println("");
+        }
+        System.out.println("");
     }
 }
