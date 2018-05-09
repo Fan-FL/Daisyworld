@@ -195,57 +195,61 @@ public class Simulation {
 
     private void checkSurvivability(){
         float seedThreshold = 0.0f;
-        for(int i=0; i<this.height; i++) {
-            for (int j = 0; j < this.width; j++) {
-                Patch patch = patches[i][j];
-                if (patch.getDaisy() != null){
-                    Daisy daisy = patch.getDaisy();
+        HashSet<Integer> worldSet = new HashSet<>();
 
-                    if (daisy.isSprout()){
-                        continue;
+        while(worldSet.size() < this.height*this.width){
+            int patchIndex = Util.getRandom(0,this.height*this.width, worldSet);
+            int i = patchIndex/this.width;
+            int j = patchIndex%this.width;
+            Patch patch = patches[i][j];
+
+            if (patch.getDaisy() != null){
+                Daisy daisy = patch.getDaisy();
+
+                if (daisy.isSprout()){
+                    continue;
+                }
+                daisy.setAge(daisy.getAge() + 1);
+
+                if (daisy.getAge() >= Params.maxAge){
+                    if (daisy.getSpecies() == Daisy.Species.BLACK){
+                        this.numBlacks--;
+                    }else{
+                        this.numWhites--;
                     }
-                    daisy.setAge(daisy.getAge() + 1);
+                    patch.setDaisy(null);
+                    continue;
+                }
 
-                    if (daisy.getAge() >= Params.maxAge){
-                        if (daisy.getSpecies() == Daisy.Species.BLACK){
-                            this.numBlacks--;
-                        }else{
-                            this.numWhites--;
-                        }
-                        patch.setDaisy(null);
-                        continue;
-                    }
+                seedThreshold = 0.1457f * patch.getTemperature()
+                        - 0.0032f * patch.getTemperature()*patch.getTemperature()
+                        - 0.6443f;
 
-                    seedThreshold = 0.1457f * patch.getTemperature()
-                            - 0.0032f * patch.getTemperature()*patch.getTemperature()
-                            - 0.6443f;
-
-                    if (Math.random() < seedThreshold){
-                        boolean seed = false;
-                        HashSet<Integer> set = new HashSet<>();
-                        while(!seed && set.size() < 9){
-                            int index = Util.getRandom(0,9, set);
-                            int dr = index/3 - 1 ;
-                            int dc = index%3 - 1 ;
-                            int r = i + dr;
-                            int c = j + dc;
-                            if ((r >= 0) && (r < this.height) && (c >= 0) && (c < this.width)
-                                    && patches[r][c].getDaisy() == null) {
-                                if (daisy.getSpecies() == Daisy.Species.BLACK){
-                                    Daisy newDaisy = new Daisy();
-                                    newDaisy.setSpecies(Daisy.Species.BLACK);
-                                    newDaisy.setAlbedo(Params.albedoOfBlacks);
-                                    patches[r][c].setDaisy(newDaisy);
-                                    this.numBlacks++;
-                                }else {
-                                    Daisy newDaisy = new Daisy();
-                                    newDaisy.setSpecies(Daisy.Species.WHITE);
-                                    newDaisy.setAlbedo(Params.albedoOfWhites);
-                                    patches[r][c].setDaisy(newDaisy);
-                                    this.numWhites++;
-                                }
-                                seed = true;
+                if (Math.random() < seedThreshold){
+                    boolean seed = false;
+                    HashSet<Integer> set = new HashSet<>();
+                    while(!seed && set.size() < 9){
+                        int index = Util.getRandom(0,9, set);
+                        int dr = index/3 - 1 ;
+                        int dc = index%3 - 1 ;
+                        int r = i + dr;
+                        int c = j + dc;
+                        if ((r >= 0) && (r < this.height) && (c >= 0) && (c < this.width)
+                                && patches[r][c].getDaisy() == null) {
+                            if (daisy.getSpecies() == Daisy.Species.BLACK){
+                                Daisy newDaisy = new Daisy();
+                                newDaisy.setSpecies(Daisy.Species.BLACK);
+                                newDaisy.setAlbedo(Params.albedoOfBlacks);
+                                patches[r][c].setDaisy(newDaisy);
+                                this.numBlacks++;
+                            }else {
+                                Daisy newDaisy = new Daisy();
+                                newDaisy.setSpecies(Daisy.Species.WHITE);
+                                newDaisy.setAlbedo(Params.albedoOfWhites);
+                                patches[r][c].setDaisy(newDaisy);
+                                this.numWhites++;
                             }
+                            seed = true;
                         }
                     }
                 }
