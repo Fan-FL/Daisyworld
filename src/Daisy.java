@@ -21,7 +21,7 @@ public class Daisy{
     }
     // there are two types of daisy, black daisy and white daisy
     public enum Species {
-        BLACK, WHITE
+        BLACK, WHITE, GREY
     }
     // @return the species of this daisy
     public Species getSpecies() {

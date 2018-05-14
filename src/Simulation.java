@@ -31,6 +31,8 @@ public class Simulation {
     private int numBlacks = 0;
     // the initial number of white daisy 
     private int numWhites = 0;
+    // the initial number of grey daisy
+    private int numGreys = 0;
     // the default scenario
     Scenario scenario = Scenario.OUR;
     // the initial global temperature
@@ -71,7 +73,7 @@ public class Simulation {
     /*
      * setting up the simulation
      * getting the solar luminosity based on the scenario
-     * randomly generate white daisies and black daisies
+     * randomly generate white daisies, black and grey daisies
      * calculating temperature or each patch and global temperature
      * writing the output to csv file
      */
@@ -84,9 +86,11 @@ public class Simulation {
         Random random = new Random();
         numBlacks = Math.round(this.height*this.width*Params.startPctBlacks);
         numWhites = Math.round(this.height*this.width*Params.startPctWhites);
+        numGreys = Math.round(this.height*this.width*Params.startPctGreys);
 
 //        System.out.println(numBlacks);
 //        System.out.println(numWhites);
+//        System.out.println(numGreys);
 
         //index of occupied patches
         HashSet<Integer> set = new HashSet<>();
@@ -112,6 +116,17 @@ public class Simulation {
             patches[index/this.width][index%this.width].setDaisy(daisy);
         }
 
+        //randomly generate grey daisies
+        for (int i=0; i<this.numGreys; i++){
+            int index = Util.getRandom(0, this.height*this.width, set);
+            Daisy daisy = new Daisy();
+            daisy.setSpecies(Daisy.Species.GREY);
+            daisy.setAlbedo(Params.albedoOfGreys);
+            daisy.setAge(random.nextInt(Params.maxAge));
+            daisy.setSprout(false);
+            patches[index/this.width][index%this.width].setDaisy(daisy);
+        }
+
         this.printWorldMap();
 
         this.calcTemperature();
@@ -127,14 +142,17 @@ public class Simulation {
             CSVWriter.writeLine(writer, Arrays.asList("albedoOfWhites", String.valueOf(Params.albedoOfWhites)));
             CSVWriter.writeLine(writer, Arrays.asList("startPctBlacks", String.valueOf(Params.startPctBlacks)));
             CSVWriter.writeLine(writer, Arrays.asList("albedoOfBlacks", String.valueOf(Params.albedoOfBlacks)));
+            CSVWriter.writeLine(writer, Arrays.asList("startPctGreys", String.valueOf(Params.startPctGreys)));
+            CSVWriter.writeLine(writer, Arrays.asList("albedoOfGreys", String.valueOf(Params.albedoOfGreys)));
             CSVWriter.writeLine(writer, Arrays.asList("solarLuminosity", String.valueOf(Params.solarLuminosity)));
             CSVWriter.writeLine(writer, Arrays.asList("albedoOfSurface", String.valueOf(Params.albedoOfSurface)));
             CSVWriter.writeLine(writer, Arrays.asList("diffusePct", String.valueOf(Params.diffusePct)));
             CSVWriter.writeLine(writer, Arrays.asList("maxAge", String.valueOf(Params.maxAge)));
-            CSVWriter.writeLine(writer, Arrays.asList("numBlacks", String.valueOf(this.numBlacks)));
             CSVWriter.writeLine(writer, Arrays.asList("numWhites", String.valueOf(this.numWhites)));
+            CSVWriter.writeLine(writer, Arrays.asList("numBlacks", String.valueOf(this.numBlacks)));
+            CSVWriter.writeLine(writer, Arrays.asList("numGreys", String.valueOf(this.numGreys)));
             CSVWriter.writeLine(writer, Arrays.asList("globalTemperature", String.valueOf(this.globalTemperature)));
-            CSVWriter.writeLine(writer, Arrays.asList("tick", "numWhites", "numBlacks", "globalTemperature"));
+            CSVWriter.writeLine(writer, Arrays.asList("tick", "numWhites", "numBlacks", "numGreys", "globalTemperature"));
             writer.flush();
         }catch (IOException e) {
             e.printStackTrace();
@@ -175,7 +193,7 @@ public class Simulation {
 
         try {
             CSVWriter.writeLine(writer, Arrays.asList(String.valueOf(this.currentTick), String.valueOf(this.numWhites),
-                    String.valueOf(this.numBlacks), String.valueOf(this.globalTemperature)));
+                    String.valueOf(this.numBlacks), String.valueOf(this.numGreys), String.valueOf(this.globalTemperature)));
             writer.flush();
         }
         catch (IOException e) {
@@ -259,8 +277,10 @@ public class Simulation {
                 if (daisy.getAge() >= Params.maxAge){
                     if (daisy.getSpecies() == Daisy.Species.BLACK){
                         this.numBlacks--;
-                    }else{
+                    }else if (daisy.getSpecies() == Daisy.Species.WHITE){
                         this.numWhites--;
+                    }else if (daisy.getSpecies() == Daisy.Species.GREY){
+                        this.numGreys--;
                     }
                     // delete the object
                     patch.setDaisy(null);
@@ -288,12 +308,18 @@ public class Simulation {
                                 newDaisy.setAlbedo(Params.albedoOfBlacks);
                                 patches[r][c].setDaisy(newDaisy);
                                 this.numBlacks++;
-                            }else {
+                            }else if (daisy.getSpecies() == Daisy.Species.WHITE){
                                 Daisy newDaisy = new Daisy();
                                 newDaisy.setSpecies(Daisy.Species.WHITE);
                                 newDaisy.setAlbedo(Params.albedoOfWhites);
                                 patches[r][c].setDaisy(newDaisy);
                                 this.numWhites++;
+                            }else if (daisy.getSpecies() == Daisy.Species.GREY){
+                                Daisy newDaisy = new Daisy();
+                                newDaisy.setSpecies(Daisy.Species.GREY);
+                                newDaisy.setAlbedo(Params.albedoOfGreys);
+                                patches[r][c].setDaisy(newDaisy);
+                                this.numGreys++;
                             }
                             seed = true;
                         }
@@ -325,12 +351,15 @@ public class Simulation {
                 Patch patch = patches[i][j];
                 // when the patch has black daisy, print 2;
                 // when the patch has white daisy, print 1;
+                // when the patch has grey daisy, print 3;
                 // otherwise, print 0
                 if (patch.getDaisy() != null){
                     if(patch.getDaisy().getSpecies() == Daisy.Species.BLACK){
                         System.out.print(String.format("%1$3d", 2));
-                    }else {
+                    }else if(patch.getDaisy().getSpecies() == Daisy.Species.WHITE){
                         System.out.print(String.format("%1$3d", 1));
+                    }else if(patch.getDaisy().getSpecies() == Daisy.Species.GREY){
+                        System.out.print(String.format("%1$3d", 3));
                     }
 
                 }else {
