@@ -4,7 +4,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
-//
+/**
+ * The class represents the  
+ * It is responsible for:
+ *  - creating all the components of the system; 
+ *  - starting all of the processes; 
+ *  - supervising processes regularly to check that all are alive.
+ *  
+ calculating average global temperature
+ */
 public class Simulation {
     // the initial tick
     private int currentTick = 0;
@@ -57,12 +65,19 @@ public class Simulation {
         this.stop = stop;
     }
     
-    // 
+    /*
+     * setting up the simulation
+     * getting the solar luminosity based on the scenario
+     * randomly generate white daisies and black daisies
+     * calculating temperature or each patch and global temperature
+     * writing the output to csv file
+     */
     public void setup(){
         if (scenario != Scenario.MAINTAIN){
+            // get solar luminosity from its cooresponding scenario
             Params.solarLuminosity = scenario.getSolarLuminosity();
         }
-
+        // randomly get the number of black daisy and of white daisy
         Random random = new Random();
         numBlacks = Math.round(this.height*this.width*Params.startPctBlacks);
         numWhites = Math.round(this.height*this.width*Params.startPctWhites);
@@ -173,6 +188,7 @@ public class Simulation {
         }
     }
 
+    // calculating temperature for each patch
     private void calcTemperature(){
         for(int i=0; i<this.height; i++){
             for(int j=0; j<this.width; j++){
@@ -181,7 +197,8 @@ public class Simulation {
             }
         }
     }
-
+    
+    // calculating average global temperature
     private void calcGlobalTemperature(){
         float sum = 0.0f;
         for(int i=0; i<this.height; i++){
@@ -214,7 +231,8 @@ public class Simulation {
             }
         }
     }
-
+    
+    //
     private void checkSurvivability(){
         float seedThreshold = 0.0f;
         for(int i=0; i<this.height; i++) {
