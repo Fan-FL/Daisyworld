@@ -5,13 +5,15 @@ import java.util.HashSet;
 import java.util.Random;
 
 /**
- * The class represents the  
+ * The top-level component of the Daisy World simulator.
+ * 
  * It is responsible for:
  *  - creating all the components of the system; 
- *  - starting all of the processes; 
- *  - supervising processes regularly to check that all are alive.
- *  
- calculating average global temperature
+ *  - running the simulation; 
+ *  - calculating temperature of each patch
+ *  - calculating average global temperature
+ *  - checking the survivability of each daisy
+ *  - writing the output to csv file
  */
 public class Simulation {
     // the initial tick
@@ -232,26 +234,29 @@ public class Simulation {
         }
     }
     
-    //
+    // checking the survivability of each daisy
     private void checkSurvivability(){
         float seedThreshold = 0.0f;
         for(int i=0; i<this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 Patch patch = patches[i][j];
+                // when there is daisy in the patch
                 if (patch.getDaisy() != null){
                     Daisy daisy = patch.getDaisy();
-
+                    // check whether the daisy could sprout
                     if (daisy.isSprout()){
                         continue;
                     }
+                    // mark the daisy's age 
                     daisy.setAge(daisy.getAge() + 1);
-
+                    // when the daisy's age exceeds the max age 
                     if (daisy.getAge() >= Params.maxAge){
                         if (daisy.getSpecies() == Daisy.Species.BLACK){
                             this.numBlacks--;
                         }else{
                             this.numWhites--;
                         }
+                        // there is no daisy in the patch
                         patch.setDaisy(null);
                         continue;
                     }
@@ -291,7 +296,7 @@ public class Simulation {
                 }
             }
         }
-
+        // update the state of patches
         for(int i=0; i<this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 Patch patch = patches[i][j];
@@ -302,6 +307,7 @@ public class Simulation {
         }
     }
    
+    // print daisies on the map
     private void printWorldMap(){
         System.out.print(String.format("%1$3s", "idx"));
         for(int j=0; j<this.width; j++){
@@ -312,6 +318,9 @@ public class Simulation {
             System.out.print(String.format("%1$3d", i));
             for(int j=0; j<this.width; j++){
                 Patch patch = patches[i][j];
+                // when the patch has black daisy, print 2;
+                // when the patch has white daisy, print 1;
+                // otherwise, print 0
                 if (patch.getDaisy() != null){
                     if(patch.getDaisy().getSpecies() == Daisy.Species.BLACK){
                         System.out.print(String.format("%1$3d", 2));
