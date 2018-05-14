@@ -4,26 +4,52 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
+/**
+ * The top-level component of the Daisy World simulator.
+ * 
+ * It is responsible for:
+ *  - creating all the components of the system; 
+ *  - running the simulation; 
+ *  - calculating temperature of each patch
+ *  - calculating average global temperature
+ *  - checking the survivability of each daisy
+ *  - printing the daisy world map
+ *  - writing the output to csv file
+ */
 public class Simulation {
+    // the initial tick
     private int currentTick = 0;
+    // the default state of the simulation
     private boolean stop = false;
+    // the default width of the map 
     private int width = 29;
+    // the default height of the map
     private int height = 29;
+    // create a new patch
     private Patch[][] patches;
+    // the initial number of black daisy 
     private int numBlacks = 0;
+    // the initial number of white daisy 
     private int numWhites = 0;
+    // the default scenario
     Scenario scenario = Scenario.OUR;
+    // the initial global temperature
     private float globalTemperature = 0.0f;
 //    private String csvFile = "Daisyworld-" + String.valueOf(System.currentTimeMillis()) + ".csv";
+    // write result to a csv file
     private String csvFile = "Daisyworld.csv";
+    // create a new writer
     FileWriter writer = null;
 
+    //
     public Simulation() {
+        // writing to csv file 
         try {
             this.writer = new FileWriter(csvFile);
         }catch (IOException e) {
             e.printStackTrace();
         }
+        //
         this.patches = new Patch[this.height][this.width];
         for(int i=0; i<this.height; i++){
             for(int j=0; j<this.width; j++){
@@ -31,20 +57,30 @@ public class Simulation {
             }
         }
     }
-
+    
+    // @return the state of the simulation 
     public boolean isStop() {
         return stop;
     }
-
+    
+    // mark the state of the simulation 
     public void setStop(boolean stop) {
         this.stop = stop;
     }
-
+    
+    /*
+     * setting up the simulation
+     * getting the solar luminosity based on the scenario
+     * randomly generate white daisies and black daisies
+     * calculating temperature or each patch and global temperature
+     * writing the output to csv file
+     */
     public void setup(){
         if (scenario != Scenario.MAINTAIN){
+            // get solar luminosity from its cooresponding scenario
             Params.solarLuminosity = scenario.getSolarLuminosity();
         }
-
+        // randomly get the number of black daisy and of white daisy
         Random random = new Random();
         numBlacks = Math.round(this.height*this.width*Params.startPctBlacks);
         numWhites = Math.round(this.height*this.width*Params.startPctWhites);
@@ -84,6 +120,7 @@ public class Simulation {
         this.outputSetup();
     }
 
+    // write the output to csv file
     private void outputSetup() {
         try {
             CSVWriter.writeLine(writer, Arrays.asList("startPctWhites", String.valueOf(Params.startPctWhites)));
@@ -103,18 +140,21 @@ public class Simulation {
             e.printStackTrace();
         }
     }
-
+    
+    // run the simulation
     public void go(){
+        // when the max tick
         if (Params.useMaxTick){
             while (!stop && currentTick < Params.maxTick){
                 tick();
             }
         }else{
+            // start to run
             while (!stop){
                 tick();
             }
         }
-
+        // print the world map
         this.printWorldMap();
         System.out.println("globalTemperature = "+ String.valueOf(this.globalTemperature));
 
@@ -151,6 +191,7 @@ public class Simulation {
         }
     }
 
+    // calculating temperature for each patch
     private void calcTemperature(){
         for(int i=0; i<this.height; i++){
             for(int j=0; j<this.width; j++){
@@ -159,7 +200,8 @@ public class Simulation {
             }
         }
     }
-
+    
+    // calculating average global temperature
     private void calcGlobalTemperature(){
         float sum = 0.0f;
         for(int i=0; i<this.height; i++){
@@ -192,7 +234,8 @@ public class Simulation {
             }
         }
     }
-
+    
+    // checking the survivability of each daisy
     private void checkSurvivability(){
         float seedThreshold = 0.0f;
         HashSet<Integer> worldSet = new HashSet<>();
@@ -203,20 +246,23 @@ public class Simulation {
             int j = patchIndex%this.width;
             Patch patch = patches[i][j];
 
+            // when there is daisy in the patch
             if (patch.getDaisy() != null){
                 Daisy daisy = patch.getDaisy();
-
+                // check whether the daisy is a new sprout one
                 if (daisy.isSprout()){
                     continue;
                 }
+                // increase the daisy's age
                 daisy.setAge(daisy.getAge() + 1);
-
+                // when the daisy's age exceeds the max age
                 if (daisy.getAge() >= Params.maxAge){
                     if (daisy.getSpecies() == Daisy.Species.BLACK){
                         this.numBlacks--;
                     }else{
                         this.numWhites--;
                     }
+                    // delete the object
                     patch.setDaisy(null);
                     continue;
                 }
@@ -255,7 +301,7 @@ public class Simulation {
                 }
             }
         }
-
+        // update the state of patches
         for(int i=0; i<this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 Patch patch = patches[i][j];
@@ -265,7 +311,8 @@ public class Simulation {
             }
         }
     }
-
+   
+    // print daisies on the map
     private void printWorldMap(){
         System.out.print(String.format("%1$3s", "idx"));
         for(int j=0; j<this.width; j++){
@@ -276,6 +323,9 @@ public class Simulation {
             System.out.print(String.format("%1$3d", i));
             for(int j=0; j<this.width; j++){
                 Patch patch = patches[i][j];
+                // when the patch has black daisy, print 2;
+                // when the patch has white daisy, print 1;
+                // otherwise, print 0
                 if (patch.getDaisy() != null){
                     if(patch.getDaisy().getSpecies() == Daisy.Species.BLACK){
                         System.out.print(String.format("%1$3d", 2));
