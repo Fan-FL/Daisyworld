@@ -13,6 +13,7 @@ import java.util.Random;
  *  - calculating temperature of each patch
  *  - calculating average global temperature
  *  - checking the survivability of each daisy
+ *  - printing the daisy world map
  *  - writing the output to csv file
  */
 public class Simulation {
