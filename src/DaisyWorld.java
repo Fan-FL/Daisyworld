@@ -1,4 +1,8 @@
-/* Simluation of the Daisy World
+/* The top-level component of the Daisy World simulator.
+ * It is responsible for:
+ *  - creating all the components of the system; 
+ *  - starting the simulation; 
+ *  - stop the simulation. 
 */
 public class DaisyWorld {
     public static void main(String[] args) {
