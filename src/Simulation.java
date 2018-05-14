@@ -4,26 +4,41 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 
+//
 public class Simulation {
+    // the initial tick
     private int currentTick = 0;
+    // the default state of the simulation
     private boolean stop = false;
+    // the default width of the map 
     private int width = 29;
+    // the default height of the map
     private int height = 29;
+    // create a new patch
     private Patch[][] patches;
+    // the initial number of black daisy 
     private int numBlacks = 0;
+    // the initial number of white daisy 
     private int numWhites = 0;
+    // the default scenario
     Scenario scenario = Scenario.OUR;
+    // the initial global temperature
     private float globalTemperature = 0.0f;
 //    private String csvFile = "Daisyworld-" + String.valueOf(System.currentTimeMillis()) + ".csv";
+    // write result to a csv file
     private String csvFile = "Daisyworld.csv";
+    // create a new writer
     FileWriter writer = null;
 
+    //
     public Simulation() {
+        // writing to csv file 
         try {
             this.writer = new FileWriter(csvFile);
         }catch (IOException e) {
             e.printStackTrace();
         }
+        //
         this.patches = new Patch[this.height][this.width];
         for(int i=0; i<this.height; i++){
             for(int j=0; j<this.width; j++){
@@ -31,15 +46,18 @@ public class Simulation {
             }
         }
     }
-
+    
+    // @return the state of the simulation 
     public boolean isStop() {
         return stop;
     }
-
+    
+    // mark the state of the simulation 
     public void setStop(boolean stop) {
         this.stop = stop;
     }
-
+    
+    // 
     public void setup(){
         if (scenario != Scenario.MAINTAIN){
             Params.solarLuminosity = scenario.getSolarLuminosity();
@@ -84,6 +102,7 @@ public class Simulation {
         this.outputSetup();
     }
 
+    // write the output to csv file
     private void outputSetup() {
         try {
             CSVWriter.writeLine(writer, Arrays.asList("startPctWhites", String.valueOf(Params.startPctWhites)));
@@ -103,18 +122,21 @@ public class Simulation {
             e.printStackTrace();
         }
     }
-
+    
+    // run the simulation
     public void go(){
+        // when the max tick
         if (Params.useMaxTick){
             while (!stop && currentTick < Params.maxTick){
                 tick();
             }
         }else{
+            // start to run
             while (!stop){
                 tick();
             }
         }
-
+        // print the world map
         this.printWorldMap();
         System.out.println("globalTemperature = "+ String.valueOf(this.globalTemperature));
 
@@ -261,7 +283,7 @@ public class Simulation {
             }
         }
     }
-
+   
     private void printWorldMap(){
         System.out.print(String.format("%1$3s", "idx"));
         for(int j=0; j<this.width; j++){
