@@ -37,15 +37,18 @@ public class Simulation {
     Scenario scenario = Scenario.OUR;
     // the initial global temperature
     private float globalTemperature = 0.0f;
-//    private String csvFile = "Daisyworld-" + String.valueOf(System.currentTimeMillis()) + ".csv";
+    // The name of the input parameters cvs file
+    private String parametersCvsFile = "Parameters.csv";
     // write result to a csv file
     private String csvFile = "Daisyworld.csv";
     // create a new writer
-    FileWriter writer = null;
+    private FileWriter writer = null;
 
     //
     public Simulation() {
-        // writing to csv file 
+        //read parameters
+        CSVHandler.readCVS(parametersCvsFile);
+        // cvs writer
         try {
             this.writer = new FileWriter(csvFile);
         }catch (IOException e) {
@@ -138,21 +141,21 @@ public class Simulation {
     // write the output to csv file
     private void outputSetup() {
         try {
-            CSVWriter.writeLine(writer, Arrays.asList("startPctWhites", String.valueOf(Params.startPctWhites)));
-            CSVWriter.writeLine(writer, Arrays.asList("albedoOfWhites", String.valueOf(Params.albedoOfWhites)));
-            CSVWriter.writeLine(writer, Arrays.asList("startPctBlacks", String.valueOf(Params.startPctBlacks)));
-            CSVWriter.writeLine(writer, Arrays.asList("albedoOfBlacks", String.valueOf(Params.albedoOfBlacks)));
-            CSVWriter.writeLine(writer, Arrays.asList("startPctGreys", String.valueOf(Params.startPctGreys)));
-            CSVWriter.writeLine(writer, Arrays.asList("albedoOfGreys", String.valueOf(Params.albedoOfGreys)));
-            CSVWriter.writeLine(writer, Arrays.asList("solarLuminosity", String.valueOf(Params.solarLuminosity)));
-            CSVWriter.writeLine(writer, Arrays.asList("albedoOfSurface", String.valueOf(Params.albedoOfSurface)));
-            CSVWriter.writeLine(writer, Arrays.asList("diffusePct", String.valueOf(Params.diffusePct)));
-            CSVWriter.writeLine(writer, Arrays.asList("maxAge", String.valueOf(Params.maxAge)));
-            CSVWriter.writeLine(writer, Arrays.asList("numWhites", String.valueOf(this.numWhites)));
-            CSVWriter.writeLine(writer, Arrays.asList("numBlacks", String.valueOf(this.numBlacks)));
-            CSVWriter.writeLine(writer, Arrays.asList("numGreys", String.valueOf(this.numGreys)));
-            CSVWriter.writeLine(writer, Arrays.asList("globalTemperature", String.valueOf(this.globalTemperature)));
-            CSVWriter.writeLine(writer, Arrays.asList("tick", "numWhites", "numBlacks", "numGreys", "globalTemperature"));
+            CSVHandler.writeLine(writer, Arrays.asList("startPctWhites", String.valueOf(Params.startPctWhites)));
+            CSVHandler.writeLine(writer, Arrays.asList("albedoOfWhites", String.valueOf(Params.albedoOfWhites)));
+            CSVHandler.writeLine(writer, Arrays.asList("startPctBlacks", String.valueOf(Params.startPctBlacks)));
+            CSVHandler.writeLine(writer, Arrays.asList("albedoOfBlacks", String.valueOf(Params.albedoOfBlacks)));
+            CSVHandler.writeLine(writer, Arrays.asList("startPctGreys", String.valueOf(Params.startPctGreys)));
+            CSVHandler.writeLine(writer, Arrays.asList("albedoOfGreys", String.valueOf(Params.albedoOfGreys)));
+            CSVHandler.writeLine(writer, Arrays.asList("solarLuminosity", String.valueOf(Params.solarLuminosity)));
+            CSVHandler.writeLine(writer, Arrays.asList("albedoOfSurface", String.valueOf(Params.albedoOfSurface)));
+            CSVHandler.writeLine(writer, Arrays.asList("diffusePct", String.valueOf(Params.diffusePct)));
+            CSVHandler.writeLine(writer, Arrays.asList("maxAge", String.valueOf(Params.maxAge)));
+            CSVHandler.writeLine(writer, Arrays.asList("numWhites", String.valueOf(this.numWhites)));
+            CSVHandler.writeLine(writer, Arrays.asList("numBlacks", String.valueOf(this.numBlacks)));
+            CSVHandler.writeLine(writer, Arrays.asList("numGreys", String.valueOf(this.numGreys)));
+            CSVHandler.writeLine(writer, Arrays.asList("start globalTemperature", String.valueOf(this.globalTemperature)));
+            CSVHandler.writeLine(writer, Arrays.asList("tick", "numWhites", "numBlacks", "numGreys", "globalTemperature"));
             writer.flush();
         }catch (IOException e) {
             e.printStackTrace();
@@ -192,7 +195,7 @@ public class Simulation {
         this.currentTick++;
 
         try {
-            CSVWriter.writeLine(writer, Arrays.asList(String.valueOf(this.currentTick), String.valueOf(this.numWhites),
+            CSVHandler.writeLine(writer, Arrays.asList(String.valueOf(this.currentTick), String.valueOf(this.numWhites),
                     String.valueOf(this.numBlacks), String.valueOf(this.numGreys), String.valueOf(this.globalTemperature)));
             writer.flush();
         }

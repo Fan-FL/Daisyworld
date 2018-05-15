@@ -1,0 +1,12 @@
+useMaxTick,true
+maxTick,800
+startPctWhites,0.15
+startPctBlacks,0.15
+startPctGreys,0.0
+albedoOfWhites,0.75
+albedoOfBlacks,0.25
+albedoOfGreys,0.5
+solarLuminosity,1.0
+albedoOfSurface,0.4
+diffusePct,0.5
+maxAge,25

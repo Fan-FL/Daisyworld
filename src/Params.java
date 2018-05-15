@@ -2,10 +2,11 @@
  * The class representing the initial parameters in the simulation
  */
 public class Params {
-    // The simulation not stop
-    public static boolean useMaxTick = false;
-    // The initial tick in the simulation
-    public static int maxTick = 0;
+    // Whether the simulation will stop when
+    // it reaches the max tick number
+    public static boolean useMaxTick = true;
+    // The max tick number of simulation
+    public static int maxTick = 800;
     // The default percentage of white daisy
 //    public static float startPctWhites = 0.2f;
     public static float startPctWhites = 0.15f;
