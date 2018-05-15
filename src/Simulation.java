@@ -37,6 +37,9 @@ public class Simulation {
     Scenario scenario = Scenario.OUR;
     // the initial global temperature
     private float globalTemperature = 0.0f;
+    private float maxTemperature = -9999.0f;
+    private float minTemperature = 9999.0f;
+    private double totalTemperature = 0.0f;
     // The name of the input parameters cvs file
     private String parametersCvsFile = "Parameters.csv";
     // write result to a csv file
@@ -81,6 +84,9 @@ public class Simulation {
      * writing the output to csv file
      */
     public void setup(){
+        this.maxTemperature = -9999.0f;
+        this.minTemperature = 9999.0f;
+        this.totalTemperature = 0.0f;
         if (scenario != Scenario.MAINTAIN){
             // get solar luminosity from its cooresponding scenario
             Params.solarLuminosity = scenario.getSolarLuminosity();
@@ -134,8 +140,10 @@ public class Simulation {
 
         this.calcTemperature();
         this.calcGlobalTemperature();
+        this.countTemperature();
 
         this.outputSetup();
+
     }
 
     // write the output to csv file
@@ -175,15 +183,21 @@ public class Simulation {
                 tick();
             }
         }
-        // print the world map
-        this.printWorldMap();
-        System.out.println("globalTemperature = "+ String.valueOf(this.globalTemperature));
 
         try {
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "avgTemperature", String.valueOf(this.totalTemperature/this.currentTick),
+                    "minTemperature", String.valueOf(this.minTemperature),
+                    "maxTemperature", String.valueOf(this.maxTemperature)));
+            writer.flush();
             writer.close();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
+
+        // print the world map
+        this.printWorldMap();
     }
 
     public void tick() {
@@ -210,6 +224,8 @@ public class Simulation {
                 Params.solarLuminosity = Params.solarLuminosity - 0.0025f;
             }
         }
+
+        this.countTemperature();
     }
 
     // calculating temperature for each patch
@@ -270,7 +286,8 @@ public class Simulation {
             // when there is daisy in the patch
             if (patch.getDaisy() != null){
                 Daisy daisy = patch.getDaisy();
-                // check whether the daisy is a new sprout one
+                // check whether the daisy is a new sprout one,
+                // if so it will not sprout daisy at this tick
                 if (daisy.isSprout()){
                     continue;
                 }
@@ -372,5 +389,18 @@ public class Simulation {
             System.out.println("");
         }
         System.out.println("");
+    }
+
+    // count the max, min and total temperate
+    private void countTemperature(){
+        if (this.minTemperature > this.globalTemperature){
+            this.minTemperature = this.globalTemperature;
+        }
+
+        if (this.maxTemperature < this.globalTemperature){
+            this.maxTemperature = this.globalTemperature;
+        }
+
+        this.totalTemperature += this.globalTemperature;
     }
 }
