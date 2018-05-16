@@ -92,6 +92,32 @@ public class CSVHandler {
                         Params.maxAge = Integer.parseInt(value);
                         break;
                     }
+                    case "scenario":{
+                        switch (Integer.parseInt(value)){
+                            case 0: {
+                                Params.scenario = Scenario.RAMP;
+                                break;
+                            }
+                            case 1: {
+                                Params.scenario = Scenario.LOW;
+                                break;
+                            }
+                            case 2: {
+                                Params.scenario = Scenario.OUR;
+                                break;
+                            }
+                            case 3: {
+                                Params.scenario = Scenario.HIGH;
+                                break;
+                            }
+                            case 4: {
+                                Params.scenario = Scenario.MAINTAIN;
+                                break;
+                            }
+                            default:
+                                break;
+                        }
+                    }
                     default:
                         break;
                 }

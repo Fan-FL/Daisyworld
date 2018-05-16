@@ -1,12 +1,13 @@
 useMaxTick,true
 maxTick,800
-startPctWhites,0.15
-startPctBlacks,0.15
+startPctWhites,0.25
+startPctBlacks,0.25
 startPctGreys,0.0
-albedoOfWhites,0.75
+albedoOfWhites,0.9
 albedoOfBlacks,0.25
 albedoOfGreys,0.5
 solarLuminosity,1.0
-albedoOfSurface,0.4
+albedoOfSurface,0.7
 diffusePct,0.5
 maxAge,25
+scenario,4

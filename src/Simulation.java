@@ -33,8 +33,6 @@ public class Simulation {
     private int numWhites = 0;
     // the initial number of grey daisy
     private int numGreys = 0;
-    // the default scenario
-    Scenario scenario = Scenario.OUR;
     // the initial global temperature
     private float globalTemperature = 0.0f;
     private float maxTemperature = -9999.0f;
@@ -87,9 +85,9 @@ public class Simulation {
         this.maxTemperature = -9999.0f;
         this.minTemperature = 9999.0f;
         this.totalTemperature = 0.0f;
-        if (scenario != Scenario.MAINTAIN){
+        if (Params.scenario != Scenario.MAINTAIN){
             // get solar luminosity from its cooresponding scenario
-            Params.solarLuminosity = scenario.getSolarLuminosity();
+            Params.solarLuminosity = Params.scenario.getSolarLuminosity();
         }
         // randomly get the number of black daisy and of white daisy
         Random random = new Random();
@@ -217,7 +215,7 @@ public class Simulation {
             e.printStackTrace();
         }
 
-        if (scenario == Scenario.RAMP){
+        if (Params.scenario == Scenario.RAMP){
             if (this.currentTick > 200 && this.currentTick <= 400){
                 Params.solarLuminosity = Params.solarLuminosity + 0.005f;
             }else if(this.currentTick > 600 && this.currentTick <= 850){

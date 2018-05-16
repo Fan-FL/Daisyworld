@@ -26,8 +26,10 @@ public class Params {
     public static float albedoOfSurface = 0.4f;
     // The default value of solar luminosity
     public static float solarLuminosity = 1.0f;
-    // 
+    // The percentage of diffuse
     public static float diffusePct = 0.5f;
     // The max age of daisy
     public static int maxAge = 25;
+    // the default scenario
+    public static Scenario scenario = Scenario.MAINTAIN;
 }
