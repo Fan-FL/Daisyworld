@@ -1,3 +1,4 @@
+The main class is DaisyWorld.java.
 Parameters.csv is the configuration file of parameters and will be loaded by the program.
 Daisyworld.scv is the output file of the results.
 

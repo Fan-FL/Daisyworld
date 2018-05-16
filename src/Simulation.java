@@ -134,7 +134,7 @@ public class Simulation {
             patches[index/this.width][index%this.width].setDaisy(daisy);
         }
 
-        this.printWorldMap();
+//        this.printWorldMap();
 
         this.calcTemperature();
         this.calcGlobalTemperature();
@@ -195,7 +195,7 @@ public class Simulation {
         }
 
         // print the world map
-        this.printWorldMap();
+//        this.printWorldMap();
     }
 
     public void tick() {
