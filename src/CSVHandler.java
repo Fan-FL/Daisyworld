@@ -5,8 +5,10 @@ public class CSVHandler {
 
     private static final char DEFAULT_SEPARATOR = ',';
 
-    private static String followCVSformat(String value) {
-
+    /*
+        Format special characters
+     */
+    private static String format(String value) {
         String result = value;
         if (result.contains("\"")) {
             result = result.replace("\"", "\"\"");
@@ -15,6 +17,10 @@ public class CSVHandler {
 
     }
 
+    /*
+        Write to a csv file.
+        Add a comma(,) between two elements in values
+     */
     public static void writeLine(Writer w, List<String> values) throws IOException {
 
         boolean first = true;
@@ -24,13 +30,16 @@ public class CSVHandler {
             if (!first) {
                 sb.append(DEFAULT_SEPARATOR);
             }
-            sb.append(followCVSformat(value));
+            sb.append(format(value));
             first = false;
         }
         sb.append("\n");
         w.append(sb.toString());
     }
 
+    /*
+        Read parameters into Params class from a csv file
+     */
     public static void readCVS(String filename){
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -41,7 +50,7 @@ public class CSVHandler {
                 String value = item[1];
                 switch (name){
                     case "useMaxTick":{
-                        if(value.equals("true")){
+                        if(value.toLowerCase().equals("true")){
                             Params.useMaxTick = true;
                         }else{
                             Params.useMaxTick = false;
@@ -126,6 +135,4 @@ public class CSVHandler {
             e.printStackTrace();
         }
     }
-
-
 }

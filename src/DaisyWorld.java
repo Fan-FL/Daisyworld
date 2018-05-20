@@ -1,5 +1,5 @@
 /**
- * The class is used to run the Daisy World simulator.
+ * The main class.
 */
 public class DaisyWorld {
     public static void main(String[] args) {

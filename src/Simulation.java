@@ -5,10 +5,9 @@ import java.util.HashSet;
 import java.util.Random;
 
 /**
- * The top-level component of the Daisy World simulator.
- * 
- * It is responsible for:
- *  - creating all the components of the system; 
+ * The top-level component of the Daisy World simulator
+ * which includes:
+ *  - creating all components of the system;
  *  - running the simulation; 
  *  - calculating temperature of each patch
  *  - calculating average global temperature
@@ -19,43 +18,45 @@ import java.util.Random;
 public class Simulation {
     // the initial tick
     private int currentTick = 0;
-    // the default state of the simulation
+    // set true to stop simulation
     private boolean stop = false;
     // the default width of the map 
     private int width = 29;
     // the default height of the map
     private int height = 29;
-    // create a new patch
+    // the array that stores all patches
     private Patch[][] patches;
-    // the initial number of black daisy 
+    // store the number of black daisy
     private int numBlacks = 0;
-    // the initial number of white daisy 
+    // store the number of white daisy
     private int numWhites = 0;
-    // the initial number of grey daisy
+    // store the initial number of grey daisy
     private int numGreys = 0;
-    // the initial global temperature
+    // store the global temperature
     private float globalTemperature = 0.0f;
+    // store the max global temperature during the simulation
     private float maxTemperature = -9999.0f;
+    // store the min global temperature during the simulation
     private float minTemperature = 9999.0f;
+    // store the sum of global temperature during the simulation for calculating the avg
     private double totalTemperature = 0.0f;
     // The name of the input parameters cvs file
     private String parametersCvsFile = "Parameters.csv";
-    // write result to a csv file
+    // The name of the cvs file that output the simulation result
     private String csvFile = "Daisyworld.csv";
-    // create a new writer
+    // writer for output csv file
     private FileWriter writer = null;
 
     //
     public Simulation() {
         //read parameters
         CSVHandler.readCVS(parametersCvsFile);
-        // cvs writer
         try {
             this.writer = new FileWriter(csvFile);
         }catch (IOException e) {
             e.printStackTrace();
         }
-        //
+        //initial all patches
         this.patches = new Patch[this.height][this.width];
         for(int i=0; i<this.height; i++){
             for(int j=0; j<this.width; j++){
@@ -64,12 +65,10 @@ public class Simulation {
         }
     }
     
-    // @return the state of the simulation 
     public boolean isStop() {
         return stop;
     }
     
-    // mark the state of the simulation 
     public void setStop(boolean stop) {
         this.stop = stop;
     }
@@ -78,15 +77,15 @@ public class Simulation {
      * setting up the simulation
      * getting the solar luminosity based on the scenario
      * randomly generate white daisies, black and grey daisies
-     * calculating temperature or each patch and global temperature
-     * writing the output to csv file
+     * calculating the initial temperature of each patch and global temperature
+     * writing the initial data to output csv file
      */
     public void setup(){
         this.maxTemperature = -9999.0f;
         this.minTemperature = 9999.0f;
         this.totalTemperature = 0.0f;
         if (Params.scenario != Scenario.MAINTAIN){
-            // get solar luminosity from its cooresponding scenario
+            // get solar luminosity from its corresponding scenario
             Params.solarLuminosity = Params.scenario.getSolarLuminosity();
         }
         // randomly get the number of black daisy and of white daisy
@@ -95,11 +94,10 @@ public class Simulation {
         numWhites = Math.round(this.height*this.width*Params.startPctWhites);
         numGreys = Math.round(this.height*this.width*Params.startPctGreys);
 
-//        System.out.println(numBlacks);
-//        System.out.println(numWhites);
-//        System.out.println(numGreys);
-
-        //index of occupied patches
+        /*
+            Storing the indices that has a daisy reside on.
+            New daisy will not generated on it.
+         */
         HashSet<Integer> set = new HashSet<>();
         //randomly generate black daisies
         for (int i=0; i<this.numBlacks; i++){
@@ -147,21 +145,36 @@ public class Simulation {
     // write the output to csv file
     private void outputSetup() {
         try {
-            CSVHandler.writeLine(writer, Arrays.asList("startPctWhites", String.valueOf(Params.startPctWhites)));
-            CSVHandler.writeLine(writer, Arrays.asList("albedoOfWhites", String.valueOf(Params.albedoOfWhites)));
-            CSVHandler.writeLine(writer, Arrays.asList("startPctBlacks", String.valueOf(Params.startPctBlacks)));
-            CSVHandler.writeLine(writer, Arrays.asList("albedoOfBlacks", String.valueOf(Params.albedoOfBlacks)));
-            CSVHandler.writeLine(writer, Arrays.asList("startPctGreys", String.valueOf(Params.startPctGreys)));
-            CSVHandler.writeLine(writer, Arrays.asList("albedoOfGreys", String.valueOf(Params.albedoOfGreys)));
-            CSVHandler.writeLine(writer, Arrays.asList("solarLuminosity", String.valueOf(Params.solarLuminosity)));
-            CSVHandler.writeLine(writer, Arrays.asList("albedoOfSurface", String.valueOf(Params.albedoOfSurface)));
-            CSVHandler.writeLine(writer, Arrays.asList("diffusePct", String.valueOf(Params.diffusePct)));
-            CSVHandler.writeLine(writer, Arrays.asList("maxAge", String.valueOf(Params.maxAge)));
-            CSVHandler.writeLine(writer, Arrays.asList("numWhites", String.valueOf(this.numWhites)));
-            CSVHandler.writeLine(writer, Arrays.asList("numBlacks", String.valueOf(this.numBlacks)));
-            CSVHandler.writeLine(writer, Arrays.asList("numGreys", String.valueOf(this.numGreys)));
-            CSVHandler.writeLine(writer, Arrays.asList("start globalTemperature", String.valueOf(this.globalTemperature)));
-            CSVHandler.writeLine(writer, Arrays.asList("tick", "numWhites", "numBlacks", "numGreys", "globalTemperature"));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "startPctWhites", String.valueOf(Params.startPctWhites)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "albedoOfWhites", String.valueOf(Params.albedoOfWhites)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "startPctBlacks", String.valueOf(Params.startPctBlacks)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "albedoOfBlacks", String.valueOf(Params.albedoOfBlacks)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "startPctGreys", String.valueOf(Params.startPctGreys)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "albedoOfGreys", String.valueOf(Params.albedoOfGreys)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "solarLuminosity", String.valueOf(Params.solarLuminosity)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "albedoOfSurface", String.valueOf(Params.albedoOfSurface)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "diffusePct", String.valueOf(Params.diffusePct)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "maxAge", String.valueOf(Params.maxAge)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "numWhites", String.valueOf(this.numWhites)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "numBlacks", String.valueOf(this.numBlacks)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "numGreys", String.valueOf(this.numGreys)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "start globalTemperature", String.valueOf(this.globalTemperature)));
+            CSVHandler.writeLine(writer, Arrays.asList(
+                    "tick", "numWhites", "numBlacks", "numGreys", "globalTemperature"));
             writer.flush();
         }catch (IOException e) {
             e.printStackTrace();
@@ -170,18 +183,18 @@ public class Simulation {
     
     // run the simulation
     public void go(){
-        // when the max tick
+        // If use the max tick
         if (Params.useMaxTick){
             while (!stop && currentTick < Params.maxTick){
                 tick();
             }
         }else{
-            // start to run
             while (!stop){
                 tick();
             }
         }
 
+        // Output max, min and avg global temperate
         try {
             CSVHandler.writeLine(writer, Arrays.asList(
                     "avgTemperature", String.valueOf(this.totalTemperature/this.currentTick),
@@ -198,7 +211,10 @@ public class Simulation {
 //        this.printWorldMap();
     }
 
-    public void tick() {
+    /*
+        Executed each tick
+     */
+    private void tick() {
         this.calcTemperature();
         this.diffuse();
         this.checkSurvivability();
@@ -207,8 +223,9 @@ public class Simulation {
         this.currentTick++;
 
         try {
-            CSVHandler.writeLine(writer, Arrays.asList(String.valueOf(this.currentTick), String.valueOf(this.numWhites),
-                    String.valueOf(this.numBlacks), String.valueOf(this.numGreys), String.valueOf(this.globalTemperature)));
+            CSVHandler.writeLine(writer, Arrays.asList(String.valueOf(this.currentTick),
+                    String.valueOf(this.numWhites), String.valueOf(this.numBlacks),
+                    String.valueOf(this.numGreys), String.valueOf(this.globalTemperature)));
             writer.flush();
         }
         catch (IOException e) {
@@ -248,19 +265,31 @@ public class Simulation {
         this.globalTemperature = sum / (this.height*this.width);
     }
 
+    /*
+        Diffuse temperatures ot its 8 neighbours
+     */
     private void diffuse(){
         for(int i=0; i<this.height; i++){
             for(int j=0; j<this.width; j++){
                 Patch patch = patches[i][j];
+                // Total temperatures that are going to be diffused to its neighbours
                 float diffuseTemp = patch.getTemperature() * Params.diffusePct;
+                // Remaining temperatures of this patch
                 patch.setTemperature(patch.getTemperature() * (1-Params.diffusePct));
                 for (int dr = -1; dr <= 1; dr++) {
                     for (int dc = -1; dc <= 1; dc++) {
+                        // except itself
                         if (dr == 0 && dc == 0) continue;
                         int r = i + dr;
                         int c = j + dc;
+                        /*
+                            Diffuse 1/8 of diffuseTemp to each neighbour.
+                            If the neighbour is out of bound,
+                            return the temperature back to itself
+                          */
                         if ((r >= 0) && (r < this.height) && (c >= 0) && (c < this.width)) {
-                            patches[r][c].setTemperature(patches[r][c].getTemperature() + diffuseTemp/8.0f);
+                            patches[r][c].setTemperature(
+                                    patches[r][c].getTemperature() + diffuseTemp/8.0f);
                         }else {
                             patch.setTemperature(patch.getTemperature() + diffuseTemp/8.0f);
                         }
@@ -272,10 +301,17 @@ public class Simulation {
     
     // checking the survivability of each daisy
     private void checkSurvivability(){
+        // Threshold for reproducing
         float seedThreshold = 0.0f;
+        /*
+            Storing the indices that has been accessed in the world.
+            Has been accessed patch will not be accessed again.
+         */
         HashSet<Integer> worldSet = new HashSet<>();
 
+        // while all patches has been accessed
         while(worldSet.size() < this.height*this.width){
+            // Traverse all patches in randomly order
             int patchIndex = Util.getRandom(0,this.height*this.width, worldSet);
             int i = patchIndex/this.width;
             int j = patchIndex%this.width;
@@ -284,8 +320,8 @@ public class Simulation {
             // when there is daisy in the patch
             if (patch.getDaisy() != null){
                 Daisy daisy = patch.getDaisy();
-                // check whether the daisy is a new sprout one,
-                // if so it will not sprout daisy at this tick
+                // check whether the daisy is a newly sprouted one,
+                // if so it cannot reproduce daisy at this tick
                 if (daisy.isSprout()){
                     continue;
                 }
@@ -305,10 +341,12 @@ public class Simulation {
                     continue;
                 }
 
+                // calculate the threshold for reproducing based on the temperature
                 seedThreshold = 0.1457f * patch.getTemperature()
                         - 0.0032f * patch.getTemperature()*patch.getTemperature()
                         - 0.6443f;
 
+                // reproduce a daisy if the generated number is less than threshold
                 if (Math.random() < seedThreshold){
                     boolean seed = false;
                     HashSet<Integer> set = new HashSet<>();
@@ -318,6 +356,10 @@ public class Simulation {
                         int dc = index%3 - 1 ;
                         int r = i + dr;
                         int c = j + dc;
+                        /*
+                            reproduce a daisy of the same type in a neighbour patch that
+                            does not have a daisy reside on and not out of the bound
+                          */
                         if ((r >= 0) && (r < this.height) && (c >= 0) && (c < this.width)
                                 && patches[r][c].getDaisy() == null) {
                             if (daisy.getSpecies() == Daisy.Species.BLACK){
@@ -345,7 +387,8 @@ public class Simulation {
                 }
             }
         }
-        // update the state of patches
+
+        // Set sprout flag to false which mean it can reproduce in the next tick
         for(int i=0; i<this.height; i++) {
             for (int j = 0; j < this.width; j++) {
                 Patch patch = patches[i][j];

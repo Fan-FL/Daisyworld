@@ -7,25 +7,20 @@ public class Patch {
     // Temperature of this patch
     private float temperature = 0.0f;
 
-    // @return the daisy in this patch
     public Daisy getDaisy() {
         return daisy;
     }
-    // set the daisy in this patch
+
     public void setDaisy(Daisy daisy) {
         this.daisy = daisy;
     }
-    // @return the temperature of this patch
+
     public float getTemperature() {
         return temperature;
     }
-    // set the temperature of this patch
+
     public void setTemperature(float temperature) {
         this.temperature = temperature;
-    }
-
-
-    public void setup() {
     }
 
     // calculating the temperature based on the albedo and whether there is a daisy in this patch
